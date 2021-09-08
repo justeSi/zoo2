@@ -16,6 +16,6 @@ class Manager extends Model
     }
 
     public function managerGetAnimals() {
-        return $this->hasMany(Animal::class, 'animal_id', 'id');
+        return $this->hasMany(Animal::class, 'manager_id', 'id');
     }
 }

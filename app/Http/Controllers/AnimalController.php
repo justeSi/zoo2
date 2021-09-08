@@ -43,14 +43,18 @@ class AnimalController extends Controller
     public function store(Request $request)
     {
         $animal = new Animal;
-        $animal->name = $request->name;
+        $animal->name = $request->animal_name;
         $animal->birth_year = $request->birth_year;
-        $animal->animal_animal = $request->animal_animal;
+        $animal->animal_book = $request->animal_book;
         $animal->specie_id = $request->specie_id;
         $animal->manager_id = $request->manager_id;
+        $manager = Manager::find($request->manager_id);
+        if($manager->specie_id != $request->specie_id) {
+            return redirect()->back()->with('info_message', 'Manager you selected is not responsible for this specie.');
+        }
         // dd($animal);
         $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('animal.index')->with('success_message', 'Animal added');
     }
 
 
@@ -88,13 +92,14 @@ class AnimalController extends Controller
     public function update(Request $request, Animal $animal)
     {
         $animal->name = $request->animal_name;
-        $animal->birth_year = $request->animal_birth_year;
+        $animal->birth_year = $request->birth_year;
         $animal->animal_book = $request->animal_book;
         $animal->specie_id = $request->specie_id;
         $animal->manager_id = $request->manager_id;
-        // dd($animal);
+        
+        
         $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'Sekmingai pakeista.');
+        return redirect()->route('animal.index')->with('success_message', 'DOne');
     }
 
     /**
@@ -106,6 +111,6 @@ class AnimalController extends Controller
     public function destroy(Animal $animal)
     {
         $animal->delete();
-        return redirect()->route('animal.index')->with('success_message', 'Sekmingai ištrinta.');
+        return redirect()->route('animal.index')->with('success_message', 'Done');
     }
 }

@@ -89,6 +89,10 @@ class SpecieController extends Controller
      */
     public function destroy(Specie $specie)
     {
+        if($specie->specieGetManagers()->count()) {
+            return redirect()->route('specie.index')->with('info_message', 'You cannot delete specie, because u have manager
+            working with it.');
+        }
         $specie->delete();
         return redirect()->route('specie.index')->with('success_message', 'Sekmingai ištrintas.');
     }
