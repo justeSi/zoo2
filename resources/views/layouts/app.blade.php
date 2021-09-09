@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title', 'Zoo')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,8 +25,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('home') }}">
+                    Zoo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -66,7 +66,7 @@
                                         Managers List
                                     </a>
                                     <a class="dropdown-item" href="{{ route('manager.create') }}">
-                                        New Manager
+                                        Add new Manager
                                     </a>
                                 </div>
                             </li>
@@ -80,7 +80,7 @@
                                         Animals List
                                     </a>
                                     <a class="dropdown-item" href="{{ route('animal.create') }}">
-                                        New Book
+                                        Add new Animal
                                     </a>
                                 </div>
                             </li>
@@ -94,7 +94,7 @@
                                         Species List
                                     </a>
                                     <a class="dropdown-item" href="{{ route('specie.create') }}">
-                                        New Species
+                                       Add new Species
                                     </a>
                                 </div>
                             </li>

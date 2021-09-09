@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add new Animal</div>
+                <div class="card-header">
+                    <h2>Add new Animal</h2>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('animal.store') }}" method="post">
                         <div class="form-group">
@@ -31,6 +33,7 @@
                                 <div class="list-group-item">
                                     <span>Managers</span>
                                     <div style="justify-self: self-end;">
+                                        <div class="form-group">
                                         <select style="width: 150px" class="select2" name="manager_id">
                                             @foreach ($managers as $manager)
                                             <option value="{{ $manager->id }}">{{ $manager->name }}
@@ -38,10 +41,11 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Add</button>
+                        <button class="btn btn-secondary" type="submit">Add</button>
                         @csrf
                     </form>
                 </div>
@@ -57,4 +61,7 @@ width: 'resolve'
 });
 });
 </script> --}}
+@endsection
+@section('title')
+Create an Animal
 @endsection

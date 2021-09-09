@@ -5,17 +5,26 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">PAVADINIMAS</div>
+                <div class="card-header">
+                    <h2>Change animal specie</h2>
+                </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{route('specie.update',$specie)}}">
-                        Name: <input type="text" name="specie_name" value="{{$specie->name}}">
+                    <form action="{{route('specie.update', $specie)}}" method="post">
+                        <div class="form-group">
+                            <label for="Name">Type of specie</label>
+                            <input value="{{$specie->name}}" type="text" name="specie_name" class="form-control">
+                            <small class="form-text text-muted">Edit information.</small>
+                        </div>
+                        <button class="btn btn-secondary" type="submit">Save changes</button>
                         @csrf
-                        <button type="submit">EDIT</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('title')
+Edit Specie
 @endsection

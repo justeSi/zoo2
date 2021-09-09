@@ -6,6 +6,7 @@ use App\Models\Animal;
 use Illuminate\Http\Request;
 use App\Models\Specie;
 use App\Models\Manager;
+use Validator;
 
 class AnimalController extends Controller
 {
@@ -43,18 +44,33 @@ class AnimalController extends Controller
     public function store(Request $request)
     {
         $animal = new Animal;
-        $animal->name = $request->animal_name;
-        $animal->birth_year = $request->birth_year;
-        $animal->animal_book = $request->animal_book;
-        $animal->specie_id = $request->specie_id;
-        $animal->manager_id = $request->manager_id;
+        $validator = Validator::make($request->all(),
+        [
+            'animal_name' => ['required', 'min:3', 'max:64'],
+            'birth_year' => ['required','regex:/^[1-9]+/','not_in:0', 'max:4'],
+            'animal_book' => ['required','string','between:3,200'],
+        ],
+     [
+    ]);
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $manager = Manager::find($request->manager_id);
         if($manager->specie_id != $request->specie_id) {
             return redirect()->back()->with('info_message', 'Manager you selected is not responsible for this specie.');
         }
-        // dd($animal);
-        $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'Animal added');
+        else {
+            $animal->name = $request->animal_name;
+            $animal->birth_year = $request->birth_year;
+            $animal->animal_book = $request->animal_book;
+            $animal->specie_id = $request->specie_id;
+            $animal->manager_id = $request->manager_id;
+            // dd($animal);
+            $animal->save();
+        }
+        return redirect() -> route('animal.index')->with('success_message', 'New animal has been successfully added.');
+    
     }
 
 
@@ -92,14 +108,13 @@ class AnimalController extends Controller
     public function update(Request $request, Animal $animal)
     {
         $animal->name = $request->animal_name;
-        $animal->birth_year = $request->birth_year;
+        $animal->birth_year = $request->animal_birth_year;
         $animal->animal_book = $request->animal_book;
         $animal->specie_id = $request->specie_id;
         $animal->manager_id = $request->manager_id;
-        
-        
+        // dd($animal);
         $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'DOne');
+        return redirect()->route('animal.index')->with('success_message', 'Sekmingai pakeista.');
     }
 
     /**
@@ -111,6 +126,6 @@ class AnimalController extends Controller
     public function destroy(Animal $animal)
     {
         $animal->delete();
-        return redirect()->route('animal.index')->with('success_message', 'Done');
+        return redirect()->route('animal.index')->with('success_message', 'Sekmingai ištrinta.');
     }
 }
