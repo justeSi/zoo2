@@ -10002,3 +10002,31 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.pagination_li_span_a {
+  background: #b91c1c;
+}
+.pagination_page-link {
+  background: #c20909;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #030303;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+  background-color: #050505;
+  border-color: #020202;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: white;
+  background-color: #050705;
+  border-color: #050505;
+}

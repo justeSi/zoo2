@@ -11,15 +11,24 @@
 
         <div class="card-body">
           @foreach ($animals as $animal)
-          <h1>Name: {{$animal->name}}</h1>
-          <h3>Specie: {{$animal->animalGetSpecie->name}}</h3>
-          <h5>Manager: {{$animal->animalGetManager->name}} {{$animal->animalGetManager->surname}} </h5>
-          <form method="POST" action="{{route('animal.destroy', [$animal])}}">
-            @csrf
-            <a class="btn btn-secondary" href="{{route('animal.edit',[$animal])}}">Edit</a>
-            <button class="btn btn-secondary" type="submit">DELETE</button>
-          </form>
+          <div class="p-3 border-bottom d-flex justify-content-between">
+            <div>
+              <h3>Name: {{ $animal->name }}</h3>
+              <h4>Specie: {{ $animal->animalGetSpecie->name }}</h4>
+              <h5>Manager: {{ $animal->animalGetManager->name }}
+                {{ $animal->animalGetManager->surname }}
+              </h5>
+            </div>
+            <form method="POST" action="{{ route('animal.destroy', [$animal]) }}">
+              @csrf
+              <div class="button-group">
+                <a class="btn btn-secondary" href="{{ route('animal.edit', [$animal]) }}">EDIT</a>
+                <button class="btn btn-secondary" type="submit">DELETE</button>
+              </div>
+            </form>
+          </div>
           @endforeach
+          <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$animals->links()}}</div>
         </div>
       </div>
     </div>
@@ -27,5 +36,5 @@
 </div>
 @endsection
 @section('title')
-List of Animals 
+List of Animals
 @endsection

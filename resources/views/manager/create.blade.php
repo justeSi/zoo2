@@ -33,7 +33,7 @@
                                 @csrf
                                 <button class="btn btn-secondary" type="submit">ADD</button>
                             </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>

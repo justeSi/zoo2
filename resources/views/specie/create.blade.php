@@ -10,10 +10,10 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{route('specie.store')}}" method="post">
+                    <form action="{{ route('specie.store') }}" method="post">
                         <div class="form-group">
                             <label>Type of species</label>
-                            <input type="text" class="form-control" name="specie_name" value="{{old('specie_name')}}">
+                            <input type="text" class="form-control" name="specie_name" value="{{ old('specie_name') }}">
                             <small class="form-text text-muted">Enter the type of specie you want to add.</small>
                         </div>
                         <button class="btn btn-secondary" type="submit">Add</button>

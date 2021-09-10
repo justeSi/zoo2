@@ -18,7 +18,7 @@
                             <small class="form-text text-muted">Eddit animals name.</small>
                             <label for="manager_surname">surname: </label>
                             <input class="form-control" type="text" name="manager_surname"
-                                value="{{ old('manager_surname', $manager->surname )}}">
+                                value="{{ old('manager_surname', $manager->surname) }}">
                             <small class="form-text text-muted">Enter animals name.</small>
                         </div>
 
@@ -29,7 +29,8 @@
                                     <select style="width: 150px" class="select2" name="specie_id">
                                         @foreach ($species as $specie)
                                         <option value="{{ $specie->id }}" @if ($specie->id == $manager->specie_id)
-                                            selected @endif>{{ $specie->name }}</option>
+                                            selected
+                                            @endif>{{ $specie->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

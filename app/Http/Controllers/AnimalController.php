@@ -10,6 +10,7 @@ use Validator;
 
 class AnimalController extends Controller
 {
+    const RESULTS_IN_PAGE = 5;
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +18,9 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $species = Specie::all();
-        $managers = Manager::all();
-        $animals = Animal::all();
+        $species = Specie::paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $managers = Manager::paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $animals = Animal::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         return view('animal.index', ['species' => $species, 'managers' => $managers, 'animals' => $animals]);
     }
 
@@ -45,13 +46,13 @@ class AnimalController extends Controller
     {
         $animal = new Animal;
         $validator = Validator::make($request->all(),
-        [
-            'animal_name' => ['required', 'min:3', 'max:64'],
-            'birth_year' => ['required','regex:/^[1-9]+/','not_in:0', 'max:4'],
-            'animal_book' => ['required','string','between:3,200'],
-        ],
-     [
-    ]);
+            [
+                'animal_name' => ['required', 'regex:/^[A-Z][a-z_-]{2,19}$/', 'min:3', 'max:64'],
+                'birth_year' => ['required','not_in:0', 'max:4'],
+                'animal_book' => ['required','string','between:3,200'],
+            ],
+            [
+        ]);
         if ($validator->fails()) {
             $request->flash();
             return redirect()->back()->withErrors($validator);
@@ -107,6 +108,18 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
+        $validator = Validator::make($request->all(),
+            [
+                'animal_name' => ['required', 'min:3', 'max:64'],
+                'animal_birth_year' => ['required','min:4', 'max:4'],
+                'animal_book' => ['required','string','between:3,200'],
+            ],
+            [
+        ]);
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
         $animal->name = $request->animal_name;
         $animal->birth_year = $request->animal_birth_year;
         $animal->animal_book = $request->animal_book;

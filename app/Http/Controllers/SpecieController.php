@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Specie;
 use Illuminate\Http\Request;
+use Validator;
 
 class SpecieController extends Controller
 {
@@ -14,7 +15,7 @@ class SpecieController extends Controller
      */
     public function index()
     {
-        $species = Specie::all();
+        $species = Specie::orderBy('name')->get();
         return view('specie.index', ['species' => $species]);
  
     }
@@ -36,12 +37,30 @@ class SpecieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $species = Specie::all();
         $specie = new Specie;
-        $specie->name = $request->specie_name;
+        $validator = Validator::make($request->all(),
+            [
+                'specie_name' => ['required','regex:/^[A-Za-z+\s]{2,19}$/', 'min:3', 'max:64'],
+            ],
+            [
+        ]);
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        } 
+        if (Specie::where('name', $request->specie_name)->exists()) {
+            return redirect()->back()->with('info_message', 'This specie already in the list');
+        }
+        
+        else {
+            $specie->name = $request->specie_name;
         // dd($specie);
         $specie->save();
-        return redirect()->route('specie.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('specie.index')->with('success_message', 'Successfully added');
+        }
+        
     }
 
     /**
@@ -75,10 +94,20 @@ class SpecieController extends Controller
      */
     public function update(Request $request, Specie $specie)
     {
+        $validator = Validator::make($request->all(),
+            [
+                'specie_name' => ['required', 'min:3', 'max:64'],
+            ],
+            [
+        ]);
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $specie->name = $request->specie_name;
         // dd($specie);
         $specie->save();
-        return redirect()->route('specie.index')->with('success_message', 'Sekmingai pakeista.');
+        return redirect()->route('specie.index')->with('success_message', 'Successfully changed.');
     }
 
     /**
@@ -94,6 +123,6 @@ class SpecieController extends Controller
             working with it.');
         }
         $specie->delete();
-        return redirect()->route('specie.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('specie.index')->with('success_message', 'Successfully removed');
     }
 }
