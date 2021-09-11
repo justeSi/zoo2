@@ -7,23 +7,26 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>
-                            {{ $manager->name }} {{ $manager->surname }}
+                            <h4 class="text-center">{{ $manager->name }} {{ $manager->surname }} </h4>
+                            <div>
+                                <h5 class="text-center">Manager of {{ $manager->managerGetSpecie->name }}</h5>
+                            </div>
                         </h3>
                     </div>
                     <div class="card-body">
                         <div class="manager-container">
+                            <h2 class="text-center"> Responsible for animals:</h2>
                             <div>
-                                Specie - {{ $manager->managerGetSpecie->name }}
-                            </div>
-                            <div>
-                                @foreach ($animals as $animal) 
-                                <ul class="list-group">
-                                    <li class="list-group-item mb-1"><b>{{$animal->name}}:  </b> ( <i>{{$animal->birth_year}} m.) {!!$animal->animal_book!!}</i></li>
-                                </ul>
-                                    
-                                    
+                                @foreach ($animals as $animal)
+                                    <ul class="list-group">
+                                        @if ( $animal->animalGetSpecie->name  ===  $manager->managerGetSpecie->name )
+                                            
+                                        <li class="list-group-item mb-1"><b>{{ $animal->name }}: </b>  {{ $animal->animalGetSpecie->name }} (
+                                            <i>{{ $animal->birth_year }} m.) 
+                                                {!! $animal->animal_book !!}</i></li>
+                                        @endif
+                                    </ul>
                                 @endforeach
-
                             </div>
                         </div>
                         <div class="manager-container">
