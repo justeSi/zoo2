@@ -42,7 +42,7 @@ class SpecieController extends Controller
         $specie = new Specie;
         $validator = Validator::make($request->all(),
             [
-                'specie_name' => ['required','regex:/^[A-Za-z+\s]{2,19}$/', 'min:3', 'max:64'],
+                'specie_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -55,10 +55,10 @@ class SpecieController extends Controller
         }
         
         else {
-            $specie->name = $request->specie_name;
-        // dd($specie);
-        $specie->save();
-        return redirect()->route('specie.index')->with('success_message', 'Successfully added');
+            $specie->name = mb_convert_case($request->specie_name, MB_CASE_TITLE, 'UTF-8');
+            // dd($specie);
+            $specie->save();
+            return redirect()->route('specie.index')->with('success_message', 'Successfully added');
         }
         
     }
@@ -96,7 +96,7 @@ class SpecieController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'specie_name' => ['required', 'min:3', 'max:64'],
+                'specie_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -104,7 +104,7 @@ class SpecieController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
-        $specie->name = $request->specie_name;
+        $specie->name = mb_convert_case($request->specie_name, MB_CASE_TITLE, 'UTF-8');
         // dd($specie);
         $specie->save();
         return redirect()->route('specie.index')->with('success_message', 'Successfully changed.');

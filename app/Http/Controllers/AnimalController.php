@@ -47,9 +47,9 @@ class AnimalController extends Controller
         $animal = new Animal;
         $validator = Validator::make($request->all(),
             [
-                'animal_name' => ['required', 'regex:/^[A-Z][a-z_-]{2,19}$/', 'min:3', 'max:64'],
+                'animal_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
                 'birth_year' => ['required','not_in:0', 'max:4'],
-                'animal_book' => ['required','string','between:3,200'],
+                'animal_book' => ['required','string'],
             ],
             [
         ]);
@@ -62,7 +62,7 @@ class AnimalController extends Controller
             return redirect()->back()->with('info_message', 'Manager you selected is not responsible for this specie.');
         }
         else {
-            $animal->name = $request->animal_name;
+            $animal->name = mb_convert_case($request->animal_name, MB_CASE_TITLE, 'UTF-8');
             $animal->birth_year = $request->birth_year;
             $animal->animal_book = $request->animal_book;
             $animal->specie_id = $request->specie_id;
@@ -110,9 +110,9 @@ class AnimalController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'animal_name' => ['required', 'min:3', 'max:64'],
+                'animal_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
                 'animal_birth_year' => ['required','min:4', 'max:4'],
-                'animal_book' => ['required','string','between:3,200'],
+                'animal_book' => ['required','string'],
             ],
             [
         ]);
@@ -120,14 +120,24 @@ class AnimalController extends Controller
                 $request->flash();
                 return redirect()->back()->withErrors($validator);
             }
-        $animal->name = $request->animal_name;
-        $animal->birth_year = $request->animal_birth_year;
-        $animal->animal_book = $request->animal_book;
-        $animal->specie_id = $request->specie_id;
-        $animal->manager_id = $request->manager_id;
-        // dd($animal);
-        $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'Sekmingai pakeista.');
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+            $manager = Manager::find($request->manager_id);
+            if($manager->specie_id != $request->specie_id) {
+                return redirect()->back()->with('info_message', 'Manager you selected is not responsible for this specie.');
+            }
+            else {
+                $animal->name = mb_convert_case($request->animal_name, MB_CASE_TITLE, 'UTF-8');
+                $animal->birth_year = $request->animal_birth_year;
+                $animal->animal_book = $request->animal_book;
+                $animal->specie_id = $request->specie_id;
+                $animal->manager_id = $request->manager_id;
+                // dd($animal);
+                $animal->save();
+            }
+        return redirect()->route('animal.index')->with('success_message', 'Successfully changed');
     }
 
     /**
@@ -139,6 +149,6 @@ class AnimalController extends Controller
     public function destroy(Animal $animal)
     {
         $animal->delete();
-        return redirect()->route('animal.index')->with('success_message', 'Sekmingai ištrinta.');
+        return redirect()->route('animal.index')->with('success_message', 'Successfully removed.');
     }
 }

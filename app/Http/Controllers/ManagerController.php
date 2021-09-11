@@ -46,8 +46,8 @@ class ManagerController extends Controller
         $manager = new Manager;
         $validator = Validator::make($request->all(),
             [
-                'manager_name' => ['required','regex:/^[A-Z][a-z_-]{2,19}$/', 'min:3', 'max:64'],
-                'manager_surname' => ['required','regex:/^[A-Z][a-z_-]{2,19}$/', 'min:3', 'max:64'],
+                'manager_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'manager_surname' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -55,8 +55,8 @@ class ManagerController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
-        $manager->name = $request->manager_name;
-        $manager->surname = $request->manager_surname;
+        $manager->name = mb_convert_case($request->manager_name, MB_CASE_TITLE, 'UTF-8');
+        $manager->surname = mb_convert_case($request->manager_surname, MB_CASE_TITLE, 'UTF-8');
         $manager->specie_id = $request->specie_id;
         // dd($manager);
         $manager->save();
@@ -70,8 +70,9 @@ class ManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Manager $manager)
-    {
-        //
+    {   
+        $animals = Animal::orderBy('name')->get();
+        return view('manager.show', ['manager' => $manager, 'animals' => $manager->managerGetAnimals]);
     }
 
     /**
@@ -98,8 +99,8 @@ class ManagerController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'manager_name' => ['required', 'min:3', 'max:64'],
-                'manager_surname' => ['required', 'min:3', 'max:64'],
+                'manager_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'manager_surname' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -107,8 +108,8 @@ class ManagerController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
-        $manager->name = $request->manager_name;
-        $manager->surname = $request->manager_surname;
+        $manager->name = mb_convert_case($request->manager_name, MB_CASE_TITLE, 'UTF-8');
+        $manager->surname = mb_convert_case($request->manager_surname, MB_CASE_TITLE, 'UTF-8');
         $manager->specie_id = $request->specie_id;
         // dd($manager);
         $manager->save();

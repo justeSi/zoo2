@@ -19,6 +19,7 @@
             <form method="POST" action="{{ route('manager.destroy', [$manager]) }}">
               @csrf
               <div class="button-group">
+                <a class="btn btn-secondary" href="{{ route('manager.show', [$manager]) }}">VIEW</a>
                 <a class="btn btn-secondary" href="{{ route('manager.edit', [$manager]) }}">EDIT</a>
                 <button class="btn btn-secondary" type="submit">DELETE</button>
               </div>

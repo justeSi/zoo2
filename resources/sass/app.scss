@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@1,300&display=swap');
 
 // Variables
 @import 'variables';
@@ -7,3 +8,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import 'custum';
+
+// Font-Awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
