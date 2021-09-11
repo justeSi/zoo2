@@ -56,8 +56,8 @@ class DatabaseSeeder extends Seeder
             ]);
             $i++;
         }
-     
-        foreach(range(1, 200) as $_) {
+        
+        foreach(range(1, 100) as $_) {
             $specie_id = rand(1, $spiecesCount);
             DB::table('animals')->insert([
                 'name' => $faker->firstName(),

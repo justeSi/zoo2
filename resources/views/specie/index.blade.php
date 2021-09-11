@@ -21,8 +21,9 @@
                                 </form>
                             </div>
                         </li>
-                        @endforeach
                     </ul>
+                        @endforeach
+                    <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$species->links()}}</div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ use Validator;
 
 class ManagerController extends Controller
 {
+    const RESULTS_IN_PAGE = 5;
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +19,7 @@ class ManagerController extends Controller
     public function index()
     {
         $species = Specie::all();
-        $managers = Manager::orderBy('name')->get();
+        $managers = Manager::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         $animals = Animal::all();
         return view('manager.index', ['species' => $species, 'managers' => $managers, 'animals' => $animals]);
     }
@@ -72,7 +73,7 @@ class ManagerController extends Controller
     public function show(Manager $manager)
     {   
         $animals = Animal::orderBy('name')->get();
-        return view('manager.show', ['manager' => $manager, 'animals' => $manager->managerGetAnimals]);
+        return view('manager.show', ['manager' => $manager, 'animals' => $animals]);
     }
 
     /**
@@ -108,11 +109,17 @@ class ManagerController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
-        $manager->name = mb_convert_case($request->manager_name, MB_CASE_TITLE, 'UTF-8');
-        $manager->surname = mb_convert_case($request->manager_surname, MB_CASE_TITLE, 'UTF-8');
-        $manager->specie_id = $request->specie_id;
-        // dd($manager);
-        $manager->save();
+        elseif (($manager->managerGetAnimals->count() > 0) && ($request -> specie_id != $manager-> managerGetSpecie->id)) {
+            return redirect()->back()->with('info_message', 'To change species with existing animals is not allowed');
+        } 
+        else {
+            $manager->name = mb_convert_case($request->manager_name, MB_CASE_TITLE, 'UTF-8');
+            $manager->surname = mb_convert_case($request->manager_surname, MB_CASE_TITLE, 'UTF-8');
+            $manager->specie_id = $request->specie_id;
+            // dd($manager);
+            $manager->save();
+        }
+        
         return redirect()->route('manager.index')->with('success_message', 'Sekmingai pakeista.');
     }
 

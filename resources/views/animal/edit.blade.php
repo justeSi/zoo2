@@ -45,8 +45,10 @@
                                 <div style="justify-self: self-end;">
                                     <select style="width: 250px" class="select2" name="manager_id">
                                         @foreach ($managers as $manager)
-                                        <option value="{{ $manager->id }}">{{ $manager->name }}
-                                            {{ $manager->surname }} {{$manager->managerGetSpecie->name}}</option>
+                                        <option value="{{ $manager->id }}" @if ($manager->id == $animal->manager_id)
+                                            selected
+                                            @endif>{{ $manager->name }}
+                                            {{ $manager->surname }} ---- {{$manager->managerGetSpecie->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -13,7 +13,7 @@
           @foreach ($animals as $animal)
           <div class="p-3 border-bottom d-flex justify-content-between">
             <div>
-              <h3>Name: {{ $animal->name }}</h3>
+              <h3> {{ $animal->name }}</h3>
               <h4>Specie: {{ $animal->animalGetSpecie->name }}</h4>
               <h5>Manager: {{ $animal->animalGetManager->name }}
                 {{ $animal->animalGetManager->surname }}
@@ -22,8 +22,9 @@
             <form method="POST" action="{{ route('animal.destroy', [$animal]) }}">
               @csrf
               <div class="button-group">
-                <a class="btn btn-secondary" href="{{ route('animal.edit', [$animal]) }}">EDIT</a>
-                <button class="btn btn-secondary" type="submit">DELETE</button>
+                <a class="btn btn-sm btn-secondary" href="{{ route('animal.show', [$animal]) }}">VIEW</a>
+                <a class="btn btn-sm btn-secondary" href="{{ route('animal.edit', [$animal]) }}">EDIT</a>
+                <button class="btn btn-sm btn-secondary" type="submit">DELETE</button>
               </div>
             </form>
           </div>

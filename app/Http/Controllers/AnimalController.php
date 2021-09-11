@@ -10,6 +10,7 @@ use Validator;
 
 class AnimalController extends Controller
 {
+    
     const RESULTS_IN_PAGE = 5;
     /**
      * Display a listing of the resource.
@@ -18,8 +19,8 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $species = Specie::paginate(self::RESULTS_IN_PAGE)->withQueryString();
-        $managers = Manager::paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $species = Specie::all();
+        $managers = Manager::all();
         $animals = Animal::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         return view('animal.index', ['species' => $species, 'managers' => $managers, 'animals' => $animals]);
     }
@@ -83,7 +84,8 @@ class AnimalController extends Controller
      */
     public function show(Animal $animal)
     {
-        //
+        $managers = Manager::orderBy('name')->get();
+        return view('animal.show', ['managers' => $managers, 'animal' => $animal]);
     }
 
     /**

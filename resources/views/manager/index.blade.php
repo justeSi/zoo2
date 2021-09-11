@@ -14,18 +14,25 @@
           <div class="p-3 border-bottom d-flex justify-content-between">
             <div>
               <h3>Manager: {{ $manager->name }} {{ $manager->surname }} </h3>
-              <h4>Specie: {{ $manager->managergetSpecie->name }}</h4>
+              <h4>Specie: {{ $manager->managerGetSpecie->name }}</h4> 
+              @if ($manager->managerGetAnimals->count() > 0)
+              {{ $manager->managerGetAnimals->count()}}
+              @else
+                No animals for this specie
+              @endif
+              
             </div>
             <form method="POST" action="{{ route('manager.destroy', [$manager]) }}">
               @csrf
-              <div class="button-group">
-                <a class="btn btn-secondary" href="{{ route('manager.show', [$manager]) }}">VIEW</a>
-                <a class="btn btn-secondary" href="{{ route('manager.edit', [$manager]) }}">EDIT</a>
-                <button class="btn btn-secondary" type="submit">DELETE</button>
+              <div class="button-group ">
+                <a class="btn btn-secondary btn-sm mt-2" href="{{ route('manager.show', [$manager]) }}">VIEW</a>
+                <a class="btn btn-secondary btn-sm  mt-2" href="{{ route('manager.edit', [$manager]) }}">EDIT</a>
+                <button class="btn btn-secondary btn-sm  mt-2" type="submit">DELETE</button>
               </div>
           </div>
           </form>
           @endforeach
+          <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$managers->links()}}</div>
         </div>
       </div>
     </div>

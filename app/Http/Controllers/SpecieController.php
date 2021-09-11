@@ -8,6 +8,7 @@ use Validator;
 
 class SpecieController extends Controller
 {
+    const RESULTS_IN_PAGE = 5;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +16,7 @@ class SpecieController extends Controller
      */
     public function index()
     {
-        $species = Specie::orderBy('name')->get();
+        $species = Specie::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         return view('specie.index', ['species' => $species]);
  
     }
@@ -51,7 +52,7 @@ class SpecieController extends Controller
             return redirect()->back()->withErrors($validator);
         } 
         if (Specie::where('name', $request->specie_name)->exists()) {
-            return redirect()->back()->with('info_message', 'This specie already in the list');
+            return redirect()->back()->with('info_message', 'This specie already is in the list');
         }
         
         else {
