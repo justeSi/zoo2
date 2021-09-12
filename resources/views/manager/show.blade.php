@@ -19,14 +19,17 @@
                             <div>
                                 @foreach ($animals as $animal)
                                     <ul class="list-group">
-                                        @if ( $animal->animalGetSpecie->name  ===  $manager->managerGetSpecie->name )
-                                            
-                                        <li class="list-group-item mb-1">
-                                            <details>
-                                                <summary> <b>{{ $animal->name }}: </b>  </summary> 
-                                                <p>(
-                                            <i>{{ $animal->birth_year }} m.) 
-                                                {!! $animal->animal_book !!}</i></p></li></details>
+                                        @if ($animal->animalGetSpecie->name === $manager->managerGetSpecie->name)
+
+                                            <li class="list-group-item mb-1">
+                                                <details>
+                                                    <summary> <b>{{ $animal->name }}: </b> </summary>
+                                                    <p>(
+                                                        <i>{{ $animal->birth_year }} m.)
+                                                            {!! $animal->animal_book !!}</i>
+                                                    </p>
+                                            </li>
+                                            </details>
                                         @endif
                                     </ul>
                                 @endforeach

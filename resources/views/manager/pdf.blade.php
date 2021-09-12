@@ -50,16 +50,17 @@
     <h1>{{ $manager->name }} {{ $manager->surname }}</h1>
     <h2>{{ $manager->managerGetSpecie->name }}</h2>
     @foreach ($animals as $animal)
-                                    <ul class="list-group">
-                                        @if ( $animal->animalGetSpecie->name  ===  $manager->managerGetSpecie->name )
-                                            
-                                        <li class="list-group-item mb-1"><b>{{ $animal->name }}: </b>  {{ $animal->animalGetSpecie->name }} (
-                                            <i>{{ $animal->birth_year }} m.) 
-                                                {!! $animal->animal_book !!}</i></li>
-                                        @endif
-                                    </ul>
-                                @endforeach
-                                    
+        <ul class="list-group">
+            @if ($animal->animalGetSpecie->name === $manager->managerGetSpecie->name)
+
+                <li class="list-group-item mb-1"><b>{{ $animal->name }}: </b> {{ $animal->animalGetSpecie->name }} (
+                    <i>{{ $animal->birth_year }} m.)
+                        {!! $animal->animal_book !!}</i>
+                </li>
+            @endif
+        </ul>
+    @endforeach
+
 
 </body>
 
