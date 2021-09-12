@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         DB::table('users')->insert([
-            'name' => 'Bebras',
-            'email' => 'bebras@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('123'),
         ]);
         $species = ['Tiger', 'Gorilla', 'Elephant', 'Chimpanzee', 'Penguin', 'Turtle', 'Panda', 'Lions', 'Rhino', 'Beaver', 'Polar Bear', 'Hippopotamus', 'Snow Leopard', 'Jaguar', 'Arctic Fox', 'Arctic Wolf'];

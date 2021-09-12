@@ -12,9 +12,10 @@
                             <span style="align-self: center;" class="m-3 ">{{ $specie->name }}</span>
                             <div class="p-3 border-bottom">
                                 <form class="btn-inline" action="{{ route('specie.destroy', $specie) }}" method="post">
-                                    <a type="button" class="btn btn-secondary btn-sm"
+                                    <a type="button" class="btn btn-dark btn-sm"
                                         href="{{ route('specie.edit', $specie) }}">Edit</a>
-                                    <button class="btn btn-secondary btn-sm" type="submit">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit"><i
+                                            class="fas fa-trash-alt"></i></button>
                                     @csrf
                                 </form>
                             </div>

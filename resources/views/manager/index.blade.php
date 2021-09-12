@@ -25,11 +25,12 @@
                                 <form method="POST" action="{{ route('manager.destroy', [$manager]) }}">
                                     @csrf
                                     <div class="button-group ">
-                                        <a class="btn btn-secondary btn-sm mt-2"
+                                        <a class="btn btn-dark btn-sm mt-2"
                                             href="{{ route('manager.show', [$manager]) }}">VIEW</a>
-                                        <a class="btn btn-secondary btn-sm  mt-2"
+                                        <a class="btn btn-dark btn-sm  mt-2"
                                             href="{{ route('manager.edit', [$manager]) }}">EDIT</a>
-                                        <button class="btn btn-secondary btn-sm  mt-2" type="submit">DELETE</button>
+                                        <button class="btn btn-danger btn-sm  mt-2" type="submit"><i
+                                                class="fas fa-trash-alt"></i></button>
                                     </div>
                             </div>
                             </form>

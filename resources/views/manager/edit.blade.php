@@ -39,7 +39,7 @@
                                 @csrf
                         </form>
                     </div>
-                    <button class="btn btn-secondary mt-3" type="submit">EDIT</button>
+                    <button class="btn btn-dark mt-3" type="submit">EDIT</button>
                 </div>
             </div>
         </div>

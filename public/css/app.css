@@ -10007,8 +10007,8 @@ h3 {
 }
 
 .column {
-  -moz-columns: 4;
-       columns: 4;
+  -moz-columns: 2;
+       columns: 2;
 }
 
 .pagination > li > a,

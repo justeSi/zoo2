@@ -16,7 +16,7 @@
                                 <input value="{{ $specie->name }}" type="text" name="specie_name" class="form-control">
                                 <small class="form-text text-muted">Edit information.</small>
                             </div>
-                            <button class="btn btn-secondary" type="submit">Save changes</button>
+                            <button class="btn btn-dark" type="submit">Save changes</button>
                             @csrf
                         </form>
                     </div>

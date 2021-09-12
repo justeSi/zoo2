@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-secondary" type="submit">Add</button>
+                            <button class="btn btn-dark" type="submit">Add</button>
                             @csrf
                         </form>
                     </div>

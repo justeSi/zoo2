@@ -22,11 +22,12 @@
                                 <form method="POST" action="{{ route('animal.destroy', [$animal]) }}">
                                     @csrf
                                     <div class="button-group">
-                                        <a class="btn btn-sm btn-secondary"
+                                        <a class="btn btn-sm btn-dark"
                                             href="{{ route('animal.show', [$animal]) }}">VIEW</a>
-                                        <a class="btn btn-sm btn-secondary"
+                                        <a class="btn btn-sm btn-dark"
                                             href="{{ route('animal.edit', [$animal]) }}">EDIT</a>
-                                        <button class="btn btn-sm btn-secondary" type="submit">DELETE</button>
+                                        <button class="btn btn-sm btn-danger" type="submit"><i
+                                                class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </form>
                             </div>

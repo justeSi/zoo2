@@ -57,7 +57,7 @@
 
 
                             @csrf
-                            <button class="btn btn-secondary" type="submit">EDIT</button>
+                            <button class="btn btn-dark" type="submit">EDIT</button>
                         </form>
                     </div>
                 </div>

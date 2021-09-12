@@ -17,7 +17,7 @@
                                     value="{{ old('specie_name') }}">
                                 <small class="form-text text-muted">Enter the type of specie you want to add.</small>
                             </div>
-                            <button class="btn btn-secondary" type="submit">Add</button>
+                            <button class="btn btn-dark" type="submit">Add</button>
                             @csrf
                         </form>
                     </div>
