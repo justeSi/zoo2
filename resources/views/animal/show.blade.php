@@ -13,7 +13,7 @@
                             </div>
                         </h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <div class="animal-container">
 
                             <i>{{ $animal->birth_year }} m.

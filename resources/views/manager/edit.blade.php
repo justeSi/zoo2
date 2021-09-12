@@ -9,7 +9,7 @@
                         <h2>Edit Manager</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <form method="POST" action="{{ route('manager.update', [$manager]) }}">
                             <div class="form-group">
                                 <label for="manager_name">name: </label>

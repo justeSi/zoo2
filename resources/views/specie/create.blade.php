@@ -9,7 +9,7 @@
                         <h2>Add animal specie</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <form action="{{ route('specie.store') }}" method="post">
                             <div class="form-group">
                                 <label>Type of species</label>

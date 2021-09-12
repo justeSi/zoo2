@@ -9,7 +9,7 @@
                         <h2>Edit Animal</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <form method="POST" action="{{ route('animal.update', [$animal]) }}">
                             <div class="form-group">
                                 <label for="animal_name"> Name: </label>

@@ -62,7 +62,7 @@ class ManagerController extends Controller
         $manager->specie_id = $request->specie_id;
         // dd($manager);
         $manager->save();
-        return redirect()->route('manager.index')->with('success_message', 'Sekmingai įrašytas.');
+        return redirect()->route('manager.index')->with('success_message', 'New manager has been successfully added.');
     }
 
     /**
@@ -121,7 +121,7 @@ class ManagerController extends Controller
             $manager->save();
         }
         
-        return redirect()->route('manager.index')->with('success_message', 'Sekmingai pakeista.');
+        return redirect()->route('manager.index')->with('success_message', 'Successfully changed.');
     }
 
     /**
@@ -133,10 +133,10 @@ class ManagerController extends Controller
     public function destroy(Manager $manager)
     {
         if($manager->managerGetAnimals->count()){
-            return redirect()->back()->with('info_message', 'negalimas veiksmas');
+            return redirect()->back()->with('info_message', 'This manager can\'t be deleted');
         }
         $manager->delete();
-        return redirect()->route('manager.index')->with('success_message', 'Sekmingai ištrintas.');
+        return redirect()->route('manager.index')->with('success_message', 'Successfully removed.');
     }
 
     public function pdf(Manager $manager)

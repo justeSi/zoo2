@@ -9,7 +9,7 @@
                         <h2>List of Managers</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         @foreach ($managers as $manager)
                             <div class="p-3 border-bottom d-flex justify-content-between">
                                 <div>

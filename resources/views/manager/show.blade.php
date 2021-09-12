@@ -13,7 +13,7 @@
                             </div>
                         </h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <div class="manager-container">
                             <h2 class="text-center"> Responsible for animals:</h2>
                             <div>

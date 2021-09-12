@@ -10033,6 +10033,19 @@ h3 {
   border-color: #396985;
 }
 
+.card-header {
+  background: linear-gradient(to bottom, #52667e 25%, #153a5c 100%) !important;
+  color: #fff !important;
+}
+
+.inner-login-wrapper {
+  background: #fdfdfd;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
+  padding: 3% !important;
+  padding-bottom: 5% !important;
+  font-weight: 700;
+}
+
 /*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)

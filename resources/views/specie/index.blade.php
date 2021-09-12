@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">List of Species</div>
 
-                    <div class="card-body column">
+                    <div class="card-body column inner-login-wrapper">
                         @foreach ($species as $specie)
                             <span style="align-self: center;" class="m-3 ">{{ $specie->name }}</span>
                             <div class="p-3 border-bottom">

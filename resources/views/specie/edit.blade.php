@@ -9,7 +9,7 @@
                         <h2>Change animal specie</h2>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body inner-login-wrapper">
                         <form action="{{ route('specie.update', $specie) }}" method="post">
                             <div class="form-group">
                                 <label for="Name">Type of specie</label>
