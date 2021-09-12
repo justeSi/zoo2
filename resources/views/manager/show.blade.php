@@ -21,9 +21,12 @@
                                     <ul class="list-group">
                                         @if ( $animal->animalGetSpecie->name  ===  $manager->managerGetSpecie->name )
                                             
-                                        <li class="list-group-item mb-1"><b>{{ $animal->name }}: </b>  {{ $animal->animalGetSpecie->name }} (
+                                        <li class="list-group-item mb-1">
+                                            <details>
+                                                <summary> <b>{{ $animal->name }}: </b>  </summary> 
+                                                <p>(
                                             <i>{{ $animal->birth_year }} m.) 
-                                                {!! $animal->animal_book !!}</i></li>
+                                                {!! $animal->animal_book !!}</i></p></li></details>
                                         @endif
                                     </ul>
                                 @endforeach
@@ -35,7 +38,7 @@
                             </div>
                         </div>
                         <a href="{{ route('manager.edit', [$manager]) }}" class="btn btn-dark m-2">Edit</a></a>
-                        {{-- <a href="{{ route('manager.pdf', [$manager]) }}" class="btn btn-info m-2">PDF</a></a> --}}
+                        <a href="{{ route('manager.pdf', [$manager]) }}" class="btn btn-dark m-2">PDF</a></a>
                     </div>
                 </div>
             </div>

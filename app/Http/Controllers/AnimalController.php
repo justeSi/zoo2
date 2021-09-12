@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Specie;
 use App\Models\Manager;
 use Validator;
+use PDF;
 
 class AnimalController extends Controller
 {
@@ -48,7 +49,7 @@ class AnimalController extends Controller
         $animal = new Animal;
         $validator = Validator::make($request->all(),
             [
-                'animal_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'animal_name' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
                 'birth_year' => ['required','not_in:0', 'max:4'],
                 'animal_book' => ['required','string'],
             ],
@@ -153,4 +154,11 @@ class AnimalController extends Controller
         $animal->delete();
         return redirect()->route('animal.index')->with('success_message', 'Successfully removed.');
     }
+    
+    public function pdf(Animal $animal)
+    {
+        $pdf = PDF::loadView('animal.pdf', ['animal' => $animal]);
+        return $pdf->download(ucfirst($animal->name).'-'.ucfirst($animal->animalGetSpecie->name).'.pdf');
+    }
+
 }

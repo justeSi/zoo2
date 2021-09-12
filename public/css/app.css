@@ -10006,11 +10006,9 @@ h3 {
   font-family: "Open Sans";
 }
 
-.pagination_li_span_a {
-  background: #b91c1c;
-}
-.pagination_page-link {
-  background: #c20909;
+.column {
+  -moz-columns: 4;
+       columns: 4;
 }
 
 .pagination > li > a,
@@ -10024,15 +10022,15 @@ h3 {
 .pagination > .active > span,
 .pagination > .active > span:focus,
 .pagination > .active > span:hover {
-  background-color: #050505;
+  background-color: #396985;
   border-color: #020202;
 }
 
 .page-item.active .page-link {
   z-index: 1;
   color: white;
-  background-color: #050705;
-  border-color: #050505;
+  background-color: #396985;
+  border-color: #396985;
 }
 
 /*!

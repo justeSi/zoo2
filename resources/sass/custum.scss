@@ -2,19 +2,10 @@
 * {
     font-family: 'Open Sans';
 }
-.pagination {
-    &_li{
-        &_span{
-            &_a{
-
-                background: rgb(185, 28, 28);
-            }
-        }
-    }
-    &_page-link{
-        background: rgb(194, 9, 9);
-    }
+.column {
+    columns: 4;
 }
+
 .pagination > li > a,
 .pagination > li > span {
     color: rgb(3, 3, 3); // use your own color here
@@ -26,12 +17,12 @@
 .pagination > .active > span,
 .pagination > .active > span:focus,
 .pagination > .active > span:hover {
-    background-color: rgb(5, 5, 5);
+    background-color: #396985;
     border-color: rgb(2, 2, 2);
 }
 .page-item.active .page-link {
     z-index: 1;
     color: rgb(255, 255, 255);
-    background-color: rgb(5, 7, 5); //your color
-    border-color: rgb(5, 5, 5); //your color
+    background-color: #396985; //your color
+    border-color: #396985; //your color
 }

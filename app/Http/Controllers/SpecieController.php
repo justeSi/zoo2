@@ -8,7 +8,7 @@ use Validator;
 
 class SpecieController extends Controller
 {
-    const RESULTS_IN_PAGE = 5;
+    // const RESULTS_IN_PAGE = 10;
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +16,9 @@ class SpecieController extends Controller
      */
     public function index()
     {
-        $species = Specie::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $species = Specie::orderBy('name')->get();
         return view('specie.index', ['species' => $species]);
- 
+        
     }
 
     /**
@@ -43,7 +43,7 @@ class SpecieController extends Controller
         $specie = new Specie;
         $validator = Validator::make($request->all(),
             [
-                'specie_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'specie_name' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -97,7 +97,7 @@ class SpecieController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'specie_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'specie_name' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
             ],
             [
         ]);

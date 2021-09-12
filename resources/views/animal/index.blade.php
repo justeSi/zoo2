@@ -29,7 +29,7 @@
             </form>
           </div>
           @endforeach
-          <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$animals->links()}}</div>
+          <div class="mt-3 pagination-dark justify-content-center pagination-md d-flex flex-sm-wrap">{{$animals->links()}}</div>
         </div>
       </div>
     </div>

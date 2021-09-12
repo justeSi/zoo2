@@ -29,8 +29,8 @@
                             </div>
                         </div>
                         
-                        <a href="{{ route('animal.edit', [$animal]) }}" class="btn btn-dark m-2">Edit</a></a>
-                        {{-- <a href="{{ route('animal.pdf', [$animal]) }}" class="btn btn-info m-2">PDF</a></a> --}}
+                        <a href="{{ route('animal.edit', [$animal]) }}" class="btn btn-dark m-2">Edit</a>
+                        <a href="{{ route('animal.pdf', [$animal]) }}" class="btn btn-dark m-2">PDF</a>
                     </div>
                 </div>
             </div>

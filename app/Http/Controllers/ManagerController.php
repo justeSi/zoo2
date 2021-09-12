@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Specie;
 use App\Models\Animal;
 use Validator;
+use PDF;
 
 class ManagerController extends Controller
 {
-    const RESULTS_IN_PAGE = 5;
+    const RESULTS_IN_PAGE = 4;
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +20,7 @@ class ManagerController extends Controller
     public function index()
     {
         $species = Specie::all();
-        $managers = Manager::orderBy('name')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
+        $managers = Manager::orderBy('surname')->paginate(self::RESULTS_IN_PAGE)->withQueryString();
         $animals = Animal::all();
         return view('manager.index', ['species' => $species, 'managers' => $managers, 'animals' => $animals]);
     }
@@ -47,8 +48,8 @@ class ManagerController extends Controller
         $manager = new Manager;
         $validator = Validator::make($request->all(),
             [
-                'manager_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
-                'manager_surname' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'manager_name' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
+                'manager_surname' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -100,8 +101,8 @@ class ManagerController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'manager_name' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
-                'manager_surname' => ['required', 'regex:/^([^0-9]*)$/', 'min:3', 'max:64'],
+                'manager_name' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
+                'manager_surname' => ['required', 'regex:/^([\p{L}]*)$/u', 'min:3', 'max:64'],
             ],
             [
         ]);
@@ -136,5 +137,12 @@ class ManagerController extends Controller
         }
         $manager->delete();
         return redirect()->route('manager.index')->with('success_message', 'Sekmingai ištrintas.');
+    }
+
+    public function pdf(Manager $manager)
+    {
+        $animals = Animal::all();
+        $pdf = PDF::loadView('manager.pdf', ['manager' => $manager, 'animals' => $animals]);
+        return $pdf->download(ucfirst($manager->name).'-'.ucfirst($manager->surname).'.pdf');
     }
 }

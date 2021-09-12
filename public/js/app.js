@@ -2128,6 +2128,11 @@ $(document).ready(function () {
     $('button').attr('disabled', 'disabled');
   });
 });
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.querySelector('[name=outfit_about]')) {
+    $('[name=outfit_about]').summernote();
+  }
+});
 
 /***/ }),
 

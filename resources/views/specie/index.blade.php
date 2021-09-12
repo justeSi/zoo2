@@ -7,12 +7,10 @@
             <div class="card">
                 <div class="card-header">List of Species</div>
 
-                <div class="card-body ">
-                    <ul class="list-group">
+                <div class="card-body column">
                         @foreach ($species as $specie)
-                        <li class="list-group-item">
-                            <span style="align-self: center;">{{ $specie->name }}</span>
-                            <div class="list-align-right">
+                            <span style="align-self: center;" class="m-3 ">{{ $specie->name }}</span>
+                            <div class="p-3 border-bottom">
                                 <form class="btn-inline" action="{{ route('specie.destroy', $specie) }}" method="post">
                                     <a type="button" class="btn btn-secondary btn-sm"
                                         href="{{ route('specie.edit', $specie) }}">Edit</a>
@@ -20,10 +18,8 @@
                                     @csrf
                                 </form>
                             </div>
-                        </li>
-                    </ul>
                         @endforeach
-                    <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$species->links()}}</div>
+                    {{-- <div class="mt-3 pagination-dark justify-content-center pagination-md  ">{{$species->links()}}</div> --}}
                 </div>
             </div>
         </div>

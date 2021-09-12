@@ -35,3 +35,9 @@ $(document).ready(function() {
         $('button').attr('disabled', 'disabled');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('[name=outfit_about]')) {
+        $('[name=outfit_about]').summernote();
+    }
+});

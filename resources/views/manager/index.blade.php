@@ -13,10 +13,10 @@
           @foreach ($managers as $manager)
           <div class="p-3 border-bottom d-flex justify-content-between">
             <div>
-              <h3>Manager: {{ $manager->name }} {{ $manager->surname }} </h3>
+              <h3>{{ $manager->name }} {{ $manager->surname }} </h3>
               <h4>Specie: {{ $manager->managerGetSpecie->name }}</h4> 
               @if ($manager->managerGetAnimals->count() > 0)
-              {{ $manager->managerGetAnimals->count()}}
+              Animals count of this specie: {{ $manager->managerGetAnimals->count()}}
               @else
                 No animals for this specie
               @endif
